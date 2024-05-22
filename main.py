@@ -11,6 +11,7 @@ def main() -> None:
     application.add_handler(CommandHandler('start', start))
     application.add_handler(MessageHandler(filters.Regex('پشتیبانی 💁‍♀️'), support))
     application.add_handler(MessageHandler(filters.Regex('خرید سرویس  💰'), order))
+    # application.add_handler(MessageHandler(filters.Regex('سرویس رایگان 🤩'), ...))
     application.add_handler(CallbackQueryHandler(order_button))
     application.add_handler(MessageHandler(filters.PHOTO, photo))
     application.add_handler(CallbackQueryHandler(admin_accept_btn))

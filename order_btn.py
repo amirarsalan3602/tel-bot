@@ -53,8 +53,8 @@ async def photo(update: Update, context: CallbackContext) -> None:
     user_id = str(update.message.from_user.id)
     photo_file = await update.message.photo[-1].get_file()
     await photo_file.download_to_drive(f'user_{user_id}.jpg')
-    await update.message.reply_text('عکس شما به ادمین ارسال شد. \n لطفا منتظر تایید ادمین باشید \n ادمین های ما تا در اولین فرصت درخواست شمارا برسی میکنند !' )
-
+    await update.message.reply_text(
+        'عکس شما به ادمین ارسال شد. \n لطفا منتظر تایید ادمین باشید \n ادمین های ما تا در اولین فرصت درخواست شمارا برسی میکنند !')
 
     # اینجا ID ادمین را قرار دهید
     admin_id = '492443372'
@@ -71,6 +71,6 @@ async def admin_accept_btn(update: Update, context: CallbackContext) -> None:
     user_id = query.data.split('_')[1]
 
     if query.data == 'ok':
-        await  context.bot.send_message(chat_id=user_id, text='OK')
+        await context.bot.send_message(chat_id=user_id, text='OK')
     elif 'fail' in query.data:
         await context.bot.send_message(chat_id=user_id, text='Fail')
