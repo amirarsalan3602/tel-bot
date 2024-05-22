@@ -3,15 +3,16 @@ from telegram.ext import Application, CommandHandler, MessageHandler, CallbackCo
 
 from root import start
 from support_btn import support
-from order_btn import order, order_button,photo,admin_accept_btn
+from order_btn import order, order_button, photo, admin_accept_btn
+from free_btn import free_acc
 
 
 def main() -> None:
-    application = Application.builder().token('6651453486:AAElaeNKNxpQqq8eDGC3nOcC7k9hBOwKHnA').build()
+    application = Application.builder().token('6651453486:AAFC4Ff5Vr56XeuSSviG-WfazSOhNUYSiMc').build()
     application.add_handler(CommandHandler('start', start))
     application.add_handler(MessageHandler(filters.Regex('پشتیبانی 💁‍♀️'), support))
     application.add_handler(MessageHandler(filters.Regex('خرید سرویس  💰'), order))
-    # application.add_handler(MessageHandler(filters.Regex('سرویس رایگان 🤩'), ...))
+    application.add_handler(MessageHandler(filters.Regex('سرویس رایگان 🤩'), free_acc))
     application.add_handler(CallbackQueryHandler(order_button))
     application.add_handler(MessageHandler(filters.PHOTO, photo))
     application.add_handler(CallbackQueryHandler(admin_accept_btn))
@@ -20,3 +21,11 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
+# urlpatterns = [
+#     path('test222', views.Core.as_view()),
+#     path('Free_acc/<str:telegram_uuid>/<str:config>', views.CreateUserAndFreeConfig.as_view()),
+#     path('vip/<str:telegram_uuid>/<str:config>', views.CreateVipConfig.as_view()),
+#     path('get_configs/<str:telegram_uuid>', views.UserConfigsView.as_view()),
+#     path('get_redis', views.GetDataFromRedis.as_view())
+# ]
