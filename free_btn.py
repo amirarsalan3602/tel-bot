@@ -4,8 +4,11 @@ from apis import connections
 
 
 async def free_acc(update: Update, context: CallbackContext) -> None:
-    connections.free_account(uuid="3243234", EXP="3d")
-    await update.message.reply_text("""
-        ✅ جهت ارتباط با پشتیبانی با آیدی زیر در ارتباط باشید 👇\n 
+    token = connections.free_account(uuid=str(update.message.from_user.id), EXP="1d")
+    await update.message.reply_text(f"""
+        بفرمایید 🤓\n تست ۱ روزه شماآماده است   \n
+        
+        `http://{connections.server}/{token}` \n
+        لطفا آموزش هارو با دقت نگاه کن !!
         📌 https://t.me/ZoonVPN_sup
-        """)
+        """, parse_mode='Markdown')
