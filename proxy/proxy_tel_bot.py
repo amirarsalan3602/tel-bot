@@ -49,9 +49,15 @@ def run_v2ray(url):
 
 
 if __name__ == '__main__':
+    venv_path = 'venv/bin/activate'  # To be valued on the server.
+    script_path = 'main.py'
+    activate_venv = f'source {venv_path}'
+    command = f'{activate_venv} && https_proxy=socks5://127.0.0.1:2080 python {script_path} & echo $!'
     while True:
         url = redis.lindex("accepted", -1)
-        pid = run_v2ray(url=url.decode("utf-8"))
+        pid_v2ray = run_v2ray(url=url.decode("utf-8"))
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, executable='/bin/bash')
+        pid_bot = process.communicate()[0].decode('utf-8').strip()
         sleep(20)
-        os.system(f"kill {pid}")
-        
+        os.system(f"kill {pid_v2ray}")
+        os.system(f"kill {pid_bot}")
