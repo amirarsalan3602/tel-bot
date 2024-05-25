@@ -1,4 +1,3 @@
-
 from telegram import Update, KeyboardButton, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackContext, filters, CallbackQueryHandler
 
@@ -7,13 +6,9 @@ from support_btn import support
 from order_btn import order, order_button, photo, admin_accept_btn
 from free_btn import free_acc
 
-proxy_url = "socks5://127.0.0.1:2080"
-
-
 
 def main() -> None:
-    application = Application.builder().token('6651453486:AAFC4Ff5Vr56XeuSSviG-WfazSOhNUYSiMc').proxy(
-        proxy=proxy_url).build()
+    application = Application.builder().token('6651453486:AAFC4Ff5Vr56XeuSSviG-WfazSOhNUYSiMc').build()
     application.add_handler(CommandHandler('start', start))
     application.add_handler(MessageHandler(filters.Regex('پشتیبانی 💁‍♀️'), support))
     application.add_handler(MessageHandler(filters.Regex('خرید سرویس  💰'), order))
@@ -34,3 +29,4 @@ if __name__ == '__main__':
 #     path('get_configs/<str:telegram_uuid>', views.UserConfigsView.as_view()),
 #     path('get_redis', views.GetDataFromRedis.as_view())
 # ]
+# run https_proxy=socks5://127.0.0.1:2080 python main.py
