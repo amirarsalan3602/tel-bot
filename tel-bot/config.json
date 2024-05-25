@@ -1,0 +1,94 @@
+{
+    "_comment": {
+        "remark": "@ZoonV | ارائه دهنده VPN پرسرعت در ایران"
+    },
+    "log": {
+        "access": "",
+        "error": "",
+        "loglevel": "error",
+        "dnsLog": false
+    },
+    "inbounds": [
+        {
+            "tag": "in_proxy",
+            "port": 2080,
+            "protocol": "socks",
+            "listen": "127.0.0.1",
+            "settings": {
+                "auth": "noauth",
+                "udp": true,
+                "userLevel": 8
+            },
+            "sniffing": {
+                "enabled": false
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "proxy",
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "104.16.190.131",
+                        "port": 8443,
+                        "users": [
+                            {
+                                "id": "9d5e7586-64e1-4c29-9d47-6cbbd57fe8d1",
+                                "security": "auto",
+                                "level": 8,
+                                "encryption": "none",
+                                "flow": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "tls",
+                "wsSettings": {
+                    "path": "/Telegram:@PARDAZESHVPN-Telegram:@PARDAZESHVPN-Telegram:@PARDAZESHVPN-Telegram:@PARDAZESHVPN-Telegram:@PARDAZESHVPN-Telegram:@PARDAZESHVPN-Telegram:@PARDAZESHVPN-Telegram:@PARDAZESHVPN-Telegram:@PARDAZESHVPN-Telegram:@PARDAZESHVPN-Telegram:@PARDAZESHVPN?ed=2048",
+                    "headers": {
+                        "Host": "pardazeshvpn-tg48.pages.dev"
+                    }
+                },
+                "tlsSettings": {
+                    "allowInsecure": true,
+                    "serverName": "pardazeshvpn-tg48.pages.dev",
+                    "show": false,
+                    "publicKey": "",
+                    "shortId": "",
+                    "spiderX": ""
+                }
+            },
+            "mux": {
+                "enabled": false,
+                "concurrency": 8
+            }
+        },
+        {
+            "tag": "direct",
+            "protocol": "freedom",
+            "settings": {
+                "domainStrategy": "UseIp"
+            }
+        },
+        {
+            "tag": "blackhole",
+            "protocol": "blackhole",
+            "settings": {}
+        }
+    ],
+    "dns": {
+        "servers": [
+            "8.8.8.8"
+        ]
+    },
+    "routing": {
+        "domainStrategy": "UseIp",
+        "rules": [],
+        "balancers": []
+    }
+}
