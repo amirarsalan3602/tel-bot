@@ -7,13 +7,13 @@ from support_btn import support
 from order_btn import order, order_button, photo, admin_accept_btn
 from free_btn import free_acc
 
-proxies = {"http://": "socks5://127.0.0.1:2080", "https://": "socks5://127.0.0.1:2080"}
+proxy_url = "socks5://127.0.0.1:2080"
 
 
 
 def main() -> None:
     application = Application.builder().token('6651453486:AAFC4Ff5Vr56XeuSSviG-WfazSOhNUYSiMc').proxy(
-        proxy=proxies).build()
+        proxy=proxy_url).build()
     application.add_handler(CommandHandler('start', start))
     application.add_handler(MessageHandler(filters.Regex('پشتیبانی 💁‍♀️'), support))
     application.add_handler(MessageHandler(filters.Regex('خرید سرویس  💰'), order))
