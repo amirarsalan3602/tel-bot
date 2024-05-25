@@ -26,7 +26,7 @@ def generate_uuid_v5(user_uuid: str, namespace=uuid.NAMESPACE_URL):
 
 def convert_vless(url: str):
     try:
-        result = subprocess.run(['python3', 'tel-bot/v2ray2json/v2ray2json.py', url], stdout=subprocess.PIPE)
+        result = subprocess.run(['python3', 'proxy/v2ray2json/v2ray2json.py', url], stdout=subprocess.PIPE)
         output = result.stdout.decode('utf-8').strip()
         json_data = json.loads(output)
         json_data['inbounds'][0]["port"] = 2080
@@ -34,7 +34,7 @@ def convert_vless(url: str):
         if user_uuid:
             json_data["outbounds"][0]['settings']['vnext'][0]["users"][0]["id"] = user_uuid
 
-        with open('tel-bot/config.json', 'w', encoding='utf-8') as f:
+        with open('proxy/config.json', 'w', encoding='utf-8') as f:
             json.dump(json_data, f, ensure_ascii=False, indent=4)
     except:
         print(f"filed = {url}")
@@ -44,7 +44,7 @@ def convert_vless(url: str):
 
 def run_v2ray(url):
     if convert_vless(url=url) == "successfully":
-        process = subprocess.Popen(["v2ray", "run", "-c", "tel-bot/config.json"])
+        process = subprocess.Popen(["v2ray", "run", "-c", "proxy/config.json"])
         return process.pid
 
 
