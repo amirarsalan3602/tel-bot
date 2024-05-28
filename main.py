@@ -4,7 +4,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, CallbackCo
 from root import start
 from support_btn import support
 from order_btn import order, order_button, photo, admin_accept_btn
-from free_btn import free_acc
+from free_btn import free_acc, check_membership_callback
 
 
 def main() -> None:
@@ -12,10 +12,12 @@ def main() -> None:
     application.add_handler(CommandHandler('start', start))
     application.add_handler(MessageHandler(filters.Regex('پشتیبانی 💁‍♀️'), support))
     application.add_handler(MessageHandler(filters.Regex('خرید سرویس  💰'), order))
+    application.add_handler(CommandHandler("freetrial", free_acc))
     application.add_handler(MessageHandler(filters.Regex('سرویس رایگان 🤩'), free_acc))
-    application.add_handler(CallbackQueryHandler(order_button))
+    application.add_handler(CallbackQueryHandler(order_button, pattern='^(3 month|6 month|1 year|CardShift_3month|CardShift_6month|CardShift_1year|send_image_pyment_3month|send_image_pyment_6month|send_image_pyment_1year)$'))
+    application.add_handler(CallbackQueryHandler(admin_accept_btn, pattern='^(ok_|fail_)\\d+$'))
+    application.add_handler(CallbackQueryHandler(check_membership_callback, pattern='check_membership'))
     application.add_handler(MessageHandler(filters.PHOTO, photo))
-    application.add_handler(CallbackQueryHandler(admin_accept_btn))
     application.run_polling()
 
 
